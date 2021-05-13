@@ -1,4 +1,4 @@
 package com.example.demo.controllers;
 
-public class test {
+public class CustomerRestController {
 }
