@@ -16,13 +16,18 @@ public class BookingsRestController {
     @Autowired
     BookingsRepository bookingsRepository;
 
+    //create booking
+    @PostMapping(value="/bookings/create", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookingsEntity createBooking(@RequestBody BookingsEntity booking) {
+        return bookingsRepository.save(booking);
+    }
+
     //find all bookings
     @GetMapping("/bookings/all")
     public List<BookingsEntity> findAllBooking() {
         return bookingsRepository.findAll();
     }
-
-    //test, anton er dum :D
 
     //find booking by id
     @GetMapping("/bookings/{id}")

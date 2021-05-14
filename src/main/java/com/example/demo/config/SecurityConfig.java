@@ -24,8 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**", "/resources/**").permitAll() //webjars og resources skal være der
                 .antMatchers("/").permitAll() //permitAll() kan udskiftes med andre roller
                 .antMatchers("/bookings/**").permitAll()
+                .antMatchers("/bookings/create").permitAll()
                 .antMatchers("/services/**").permitAll()
                 .antMatchers("/customers/**").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/sog").hasRole("ADMIN") // "/sog" er tilgængelig for brugere med ADMIN rolle
                 .anyRequest()
                 .authenticated()
