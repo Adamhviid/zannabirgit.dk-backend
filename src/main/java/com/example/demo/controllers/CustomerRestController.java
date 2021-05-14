@@ -18,13 +18,13 @@ public class CustomerRestController {
     CustomerRepository customerRepository;
 
     //find all customers
-    @GetMapping("/customer/all")
+    @GetMapping("/customers/all")
     public List<CustomerEntity> findAllCustomer() {
         return customerRepository.findAll();
     }
 
     //find customer by id
-    @GetMapping("/customer/{id}")
+    @GetMapping("/customers/{id}")
     public CustomerEntity findCustomerById(@PathVariable Integer id) {
         return customerRepository.getCustomerById(id);
     }

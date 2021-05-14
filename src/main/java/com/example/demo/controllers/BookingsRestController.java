@@ -22,6 +22,8 @@ public class BookingsRestController {
         return bookingsRepository.findAll();
     }
 
+    //test, anton er dum :D
+
     //find booking by id
     @GetMapping("/bookings/{id}")
     public BookingsEntity printBooking(@PathVariable Integer id) {
