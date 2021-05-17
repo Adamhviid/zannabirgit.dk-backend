@@ -22,17 +22,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/webjars/**", "/resources/**").permitAll() //webjars og resources skal være der
-                .antMatchers("/").permitAll() //permitAll() kan udskiftes med andre roller
-                .antMatchers("/bookings/**").permitAll()
-                .antMatchers("/services/**").permitAll()
-                .antMatchers("/customers/**").permitAll()
-                .antMatchers("/sog").hasRole("ADMIN") // "/sog" er tilgængelig for brugere med ADMIN rolle
+                .antMatchers("/**").permitAll() //permitAll() kan udskiftes med andre roller
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
 //               .loginPage("/") //kan give adgang til specifikke sider
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .cors().and().
+                csrf().disable();
     }
 }
