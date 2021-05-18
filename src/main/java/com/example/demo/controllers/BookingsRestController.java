@@ -18,6 +18,7 @@ public class BookingsRestController {
 
     //create booking
     @PostMapping(value="/bookings/create", consumes = "application/json")
+//    @RequestMapping(value="/bookings/create", consumes = "application/json", method = {RequestMethod.POST})
     @ResponseStatus(HttpStatus.CREATED)
     public BookingsEntity createBooking(@RequestBody BookingsEntity booking) {
         return bookingsRepository.save(booking);
@@ -37,7 +38,7 @@ public class BookingsRestController {
 
     //delete booking
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @GetMapping("/booking/delete/{id}")
+    @DeleteMapping("/bookings/delete/{id}")
     public void deleteBooking(@PathVariable Integer id) {
         try{
             bookingsRepository.deleteById(id);
