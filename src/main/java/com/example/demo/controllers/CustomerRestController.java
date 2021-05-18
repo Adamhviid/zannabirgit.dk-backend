@@ -18,21 +18,25 @@ public class CustomerRestController {
     //find all customers
     @GetMapping("/customers/all")
     public List<CustomerEntity> findAllCustomer() {
-        System.out.println("hej");
         return customerRepository.findAll();
     }
 
     //find customer by id
-    @GetMapping("/customers/{id}")
+    @GetMapping("/customers/id/{id}")
     public CustomerEntity findCustomerById(@PathVariable Integer id) {
         return customerRepository.getCustomerById(id);
     }
 
-    //create booking
+    //create customer
     @PostMapping(value="localhost:8080/customers/create", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerEntity addCustomer(@RequestBody CustomerEntity customer) {
-
         return customerRepository.save(customer);
+    }
+
+    //find email by id
+    @GetMapping("/customers/email/{email}")
+    public CustomerEntity findCustomerByEmail(@PathVariable String email) {
+        return customerRepository.getCustomerIdByEmail(email);
     }
 }
