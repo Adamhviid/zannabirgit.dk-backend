@@ -9,5 +9,4 @@ public interface BookingsRepository extends JpaRepository<BookingsEntity, Intege
     //get booking by id
     @Query("FROM BookingsEntity WHERE bookingId = ?1")
     BookingsEntity findBookingById(int id);
-
 }
