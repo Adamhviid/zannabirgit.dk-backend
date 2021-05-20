@@ -30,7 +30,7 @@ public class ServicesRestController {
 
     //delete services
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @GetMapping("/products/delete/{id}")
+    @GetMapping("/services/delete/{id}")
     public void deleteProduct(@PathVariable Integer id) {
         try{
             servicesRepository.deleteById(id);
