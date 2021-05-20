@@ -1,8 +1,9 @@
-package com.example.demo.services;
+package com.example.demo.services.JPA;
 
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.Booking;
 import com.example.demo.repositories.BookingRepository;
+import com.example.demo.services.BookingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

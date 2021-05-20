@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "booking_calendar", schema = "zannabirgit.dk-db", catalog = "")
-public class BookingCalendarEntity {
+public class BookingCalendarView {
     private int bookingId;
     private Date bookingDate;
     private Time bookingTime;
@@ -101,7 +101,7 @@ public class BookingCalendarEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookingCalendarEntity that = (BookingCalendarEntity) o;
+        BookingCalendarView that = (BookingCalendarView) o;
         return bookingId == that.bookingId &&
                 customerPhone == that.customerPhone &&
                 serviceLength == that.serviceLength &&

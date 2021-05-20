@@ -6,7 +6,4 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ServiceRepository extends JpaRepository<Services, Integer> {
 
-    //get product by id
-    @Query("FROM Services WHERE serviceId = ?1")
-    Services getServicesById(int productId);
 }

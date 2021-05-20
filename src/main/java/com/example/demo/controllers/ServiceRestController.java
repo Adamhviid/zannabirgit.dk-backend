@@ -2,7 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.Services;
-import com.example.demo.services.ServicesJPAService;
+import com.example.demo.services.JPA.ServicesJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
