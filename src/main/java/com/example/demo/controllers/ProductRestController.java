@@ -1,12 +1,13 @@
 package com.example.demo.controllers;
 
+import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.Product;
 import com.example.demo.services.JPA.ProductJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,33 +31,35 @@ public class ProductRestController {
     //delete product
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/products/delete/{id}")
-    public void deleteProduct(@PathVariable Integer id) {
+    public ResponseEntity<Integer> deleteProduct(@PathVariable Integer id) {
         try{
-            productsRepository.deleteById(id);
+            productJPAService.deleteById(id);
         } catch(EmptyResultDataAccessException e){
-            System.out.println("FEJL I DELETE -" + e.getMessage());
+            throw new ResourceNotFoundException("Produkt med id="+id+" findes ikke.");
         }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    //post product
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value="/products/edit", consumes = "application/json")
+    public Product editProduct(@RequestBody Product product) {
+        return productJPAService.save(product);
     }
 
     //edit product
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value="/products/edit", consumes = "application/json")
-    public ProductsEntity editProduct(@RequestBody ProductsEntity product) {
-        return productsRepository.save(product);
-    }
+    @PutMapping("/products/edit/{id}")
+    public ResponseEntity<Product> editProduct(@PathVariable(value="id") Integer id, @RequestBody Product newProduct) throws ResourceNotFoundException {
+        Product productTemplate = productJPAService.findById(id);
 
-//    @PutMapping("/products/edit/{id}")
-//    public ResponseEntity<ProductsEntity> editBooking(@PathVariable(value="id") Integer id, @Valid @RequestBody ProductsEntity product) throws ResourceNotFoundException {
-//        ProductsEntity productsEntity = productsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("error"));
-//
-//        if(product.getProductName() != null){
-//            productsEntity.setProductName(product.getProductName());
-//        }
-//        if(product.getProductPrice() != 0){
-//            productsEntity.setProductPrice(product.getProductPrice());
-//        }
-//
-//        final ProductsEntity updatedProductsEntity = productsRepository.save(productsEntity);
-//        return ResponseEntity.ok(updatedProductsEntity);
-//    }
+        if(newProduct.getProductName() != null){
+            productTemplate.setProductName(newProduct.getProductName());
+        }
+        if(newProduct.getProductPrice() != 0){
+            productTemplate.setProductPrice(newProduct.getProductPrice());
+        }
+
+        final Product updatedProductsEntity = productJPAService.save(productTemplate);
+        return ResponseEntity.ok(updatedProductsEntity);
+    }
 }

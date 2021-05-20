@@ -36,14 +36,14 @@ public class ServiceRestController {
         return new ResponseEntity<>(services, HttpStatus.OK);
     }
 
-    //post customer
+    //post service
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value="/services/create", consumes = "application/json")
     public Services createService(@RequestBody Services services) {
         return servicesJPAService.save(services);
     }
 
-    //delete services
+    //delete service
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/services/delete/{id}")
     public ResponseEntity<Integer> deleteService(@PathVariable Integer id) {
