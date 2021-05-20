@@ -9,4 +9,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
     //get customer by id
     @Query("FROM CustomerEntity WHERE customerId =?1")
     CustomerEntity getCustomerById(int customerId);
+
+    @Query("FROM CustomerEntity WHERE customerEmail =?1")
+    CustomerEntity getCustomerIdByEmail(String customerEmail);
 }
