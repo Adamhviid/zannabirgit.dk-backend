@@ -10,9 +10,9 @@ import java.util.Objects;
 public class Booking {
     private int bookingId;
     private int serviceId;
-    private int customerId;
     private Date bookingDate;
     private Time bookingTime;
+    private int customerId;
 
     @Id
     @Column(name = "booking_id")
@@ -35,16 +35,6 @@ public class Booking {
     }
 
     @Basic
-    @Column(name = "customer_id")
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    @Basic
     @Column(name = "booking_date")
     public Date getBookingDate() {
         return bookingDate;
@@ -62,6 +52,16 @@ public class Booking {
 
     public void setBookingTime(Time bookingTime) {
         this.bookingTime = bookingTime;
+    }
+
+    @Basic
+    @Column(name = "customer_id")
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     @Override

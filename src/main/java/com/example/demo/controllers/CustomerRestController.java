@@ -4,6 +4,8 @@ import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.Customer;
 import com.example.demo.services.CustomerJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,12 @@ public class CustomerRestController {
     public ResponseEntity<Customer> findCustomerById(@PathVariable Integer id) {
         Customer customer = customerJPAService.findById(id);
         return new ResponseEntity<>(customer, HttpStatus.OK);
+    }
+
+    //find customer email by id
+    @GetMapping("/customers/email/{email}")
+    public CustomerEntity findCustomerByEmail(@PathVariable String email) {
+        return customerRepository.getCustomerIdByEmail(email);
     }
 
     //post customer
