@@ -1,4 +1,4 @@
-package com.example.demo.exception;
+package com.example.demo.exceptions;
 
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;

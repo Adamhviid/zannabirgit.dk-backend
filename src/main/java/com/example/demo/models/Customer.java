@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customer", schema = "zannabirgit.dk-db", catalog = "")
-public class CustomersEntity {
+public class Customer {
     private int customerId;
     private String customerName;
     private String customerEmail;
@@ -55,7 +55,7 @@ public class CustomersEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomersEntity that = (CustomersEntity) o;
+        Customer that = (Customer) o;
         return customerId == that.customerId &&
                 customerPhone == that.customerPhone &&
                 Objects.equals(customerName, that.customerName) &&

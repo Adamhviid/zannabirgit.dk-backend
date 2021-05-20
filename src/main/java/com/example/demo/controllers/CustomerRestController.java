@@ -1,8 +1,9 @@
 package com.example.demo.controllers;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.models.CustomersEntity;
+import com.example.demo.exceptions.ResourceNotFoundException;
+import com.example.demo.models.Customer;
 import com.example.demo.repositories.CustomerRepository;
+import com.example.demo.services.CustomerJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,14 @@ import java.util.List;
 public class CustomerRestController {
 
     @Autowired
-    CustomerRepository customerRepository;
+    CustomerJPAService customerJPAService;
 
     //find all customers
     @GetMapping("/customers/all")
-    public ResponseEntity<List<CustomersEntity>> findAllCustomers(){
-        List<CustomersEntity> customersEntityList = customerRepository.findAll();
-        if (customersEntityList.size() >= 1) {
-            return new ResponseEntity<>(customersEntityList, HttpStatus.OK);
+    public ResponseEntity<List<Customer>> findAllCustomers(){
+        List<Customer> customerList = customerJPAService.findAll();
+        if (customerList.size() >= 1) {
+            return new ResponseEntity<>(customerList, HttpStatus.OK);
         } else {
             throw new ResourceNotFoundException("Der er ingen kunder");
         }
@@ -31,26 +32,27 @@ public class CustomerRestController {
 
     //find customer by id
     @GetMapping("/customers/{id}")
-    public ResponseEntity<CustomersEntity> findCustomerById(@PathVariable Integer id) {
-        CustomersEntity customersEntity = customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Kunde med id="+id+" finde ikke."));
-        return new ResponseEntity<>(customersEntity, HttpStatus.OK);
+    public ResponseEntity<Customer> findCustomerById(@PathVariable Integer id) {
+        Customer customer = customerJPAService.findById(id);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     //post customer
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value="/customers/create", consumes = "application/json")
-    public CustomersEntity createCustomer(@RequestBody CustomersEntity customer) {
-        return customerRepository.save(customer);
+    public Customer createCustomer(@RequestBody Customer customer) {
+        return customerJPAService.save(customer);
     }
 
     //delete customer
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/customers/delete/{id}")
-    public void deleteCustomer(@PathVariable Integer id) {
+    public ResponseEntity<Integer> deleteCustomer(@PathVariable Integer id) {
         try{
-            customerRepository.deleteById(id);
+            customerJPAService.deleteById(id);
         } catch(EmptyResultDataAccessException e){
-            System.out.println("Kunde med id="+id+" findes ikke." + e.getMessage());
+            throw new ResourceNotFoundException("Kunde med id="+id+" findes ikke.");
         }
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

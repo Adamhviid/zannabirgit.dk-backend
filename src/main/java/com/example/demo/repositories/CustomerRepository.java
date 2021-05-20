@@ -1,12 +1,12 @@
 package com.example.demo.repositories;
 
-import com.example.demo.models.CustomersEntity;
+import com.example.demo.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface CustomerRepository extends JpaRepository<CustomersEntity, Integer> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     //get customer by id
-    @Query("FROM CustomersEntity WHERE customerId =?1")
-    CustomersEntity getCustomerById(int customerId);
+    @Query("FROM Customer WHERE customerId =?1")
+    Customer getCustomerById(int customerId);
 }
