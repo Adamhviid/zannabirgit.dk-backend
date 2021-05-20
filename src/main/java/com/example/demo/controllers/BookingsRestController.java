@@ -18,7 +18,6 @@ public class BookingsRestController {
 
     //create booking
     @PostMapping(value="/bookings/create", consumes = "application/json")
-//    @RequestMapping(value="/bookings/create", consumes = "application/json", method = {RequestMethod.POST})
     @ResponseStatus(HttpStatus.CREATED)
     public BookingsEntity createBooking(@RequestBody BookingsEntity booking) {
         return bookingsRepository.save(booking);
