@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.Customer;
-import com.example.demo.repositories.CustomerRepository;
 import com.example.demo.services.CustomerJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
