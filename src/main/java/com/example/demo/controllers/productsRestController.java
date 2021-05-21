@@ -32,7 +32,7 @@ public class productsRestController {
 
     //delete product
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/products/delete/{id}")
+    @GetMapping("/products/delete/{id}")
     public void deleteProduct(@PathVariable Integer id) {
         try{
             productsRepository.deleteById(id);
@@ -42,8 +42,8 @@ public class productsRestController {
     }
 
     //edit product
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value="/products/edit", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductsEntity editProduct(@RequestBody ProductsEntity product) {
         return productsRepository.save(product);
     }

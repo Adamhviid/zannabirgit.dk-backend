@@ -28,7 +28,7 @@ public class CustomerRestController {
     }
 
     //create customer
-    @PostMapping(value="localhost:8080/customers/create", consumes = "application/json")
+    @PostMapping(value="/customers/create", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerEntity addCustomer(@RequestBody CustomerEntity customer) {
         return customerRepository.save(customer);
