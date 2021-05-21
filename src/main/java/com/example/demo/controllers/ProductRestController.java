@@ -30,7 +30,7 @@ public class ProductRestController {
 
     //delete product
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @GetMapping("/products/delete/{id}")
+    @DeleteMapping("/products/delete/{id}")
     public ResponseEntity<Integer> deleteProduct(@PathVariable Integer id) {
         try {
             productJPAService.deleteById(id);
@@ -41,8 +41,8 @@ public class ProductRestController {
     }
 
     //post product
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/products/edit", consumes = "application/json")
+//    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping(value = "/products/edit", consumes = "application/json")
     public Product editProduct(@RequestBody Product product) {
         return productJPAService.save(product);
     }
