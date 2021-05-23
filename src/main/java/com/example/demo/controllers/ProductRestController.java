@@ -32,34 +32,35 @@ public class ProductRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/products/delete/{id}")
     public ResponseEntity<Integer> deleteProduct(@PathVariable Integer id) {
-        try{
+        try {
             productJPAService.deleteById(id);
-        } catch(EmptyResultDataAccessException e){
-            throw new ResourceNotFoundException("Produkt med id="+id+" findes ikke.");
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Produkt med id=" + id + " findes ikke.");
         }
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     //post product
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value="/products/edit", consumes = "application/json")
+//    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping(value = "/products/edit", consumes = "application/json")
     public Product editProduct(@RequestBody Product product) {
         return productJPAService.save(product);
     }
 
+
     //edit product
-    @PutMapping("/products/edit/{id}")
-    public ResponseEntity<Product> editProduct(@PathVariable(value="id") Integer id, @RequestBody Product newProduct) throws ResourceNotFoundException {
-        Product productTemplate = productJPAService.findById(id);
-
-        if(newProduct.getProductName() != null){
-            productTemplate.setProductName(newProduct.getProductName());
-        }
-        if(newProduct.getProductPrice() != 0){
-            productTemplate.setProductPrice(newProduct.getProductPrice());
-        }
-
-        final Product updatedProductsEntity = productJPAService.save(productTemplate);
-        return ResponseEntity.ok(updatedProductsEntity);
-    }
+//    @PutMapping("/products/edit/{id}")
+//    public ResponseEntity<Product> editProduct(@PathVariable(value="id") Integer id, @RequestBody Product newProduct) throws ResourceNotFoundException {
+//        Product productTemplate = productJPAService.findById(id);
+//
+//        if(newProduct.getProductName() != null){
+//            productTemplate.setProductName(newProduct.getProductName());
+//        }
+//        if(newProduct.getProductPrice() != 0){
+//            productTemplate.setProductPrice(newProduct.getProductPrice());
+//        }
+//
+//        final Product updatedProductsEntity = productJPAService.save(productTemplate);
+//        return ResponseEntity.ok(updatedProductsEntity);
+//    }
 }
