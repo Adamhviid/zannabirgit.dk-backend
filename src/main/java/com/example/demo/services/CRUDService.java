@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import java.util.List;
-import java.util.Set;
 
 public interface CRUDService<T, ID> {
     List<T> findAll();
