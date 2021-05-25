@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    @Query("FROM Customer WHERE customerEmail =?1")
+    @Query("FROM Customer WHERE customerEmail = ?1")
     Customer getCustomerIdByEmail(String customerEmail);
 }

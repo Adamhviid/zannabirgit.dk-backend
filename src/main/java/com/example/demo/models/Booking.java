@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.example.demo.exceptions.ResourceNotFoundException;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;

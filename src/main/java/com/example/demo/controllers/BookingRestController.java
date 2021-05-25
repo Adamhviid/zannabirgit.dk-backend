@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @CrossOrigin(value = "*")
@@ -33,6 +35,13 @@ public class BookingRestController {
     @GetMapping("/bookings/{id}")
     public ResponseEntity<Booking> findBookingById(@PathVariable Integer id) {
         Booking booking = bookingJPAService.findById(id);
+        return new ResponseEntity<>(booking, HttpStatus.OK);
+    }
+
+    //find booking by date & time
+    @GetMapping("/bookings/datetime/{bookingDate},{bookingTime}")
+    public ResponseEntity<Booking> findByDateTime(@PathVariable Date bookingDate, @PathVariable Time bookingTime) {
+        Booking booking = bookingJPAService.findByDateTime(bookingDate, bookingTime);
         return new ResponseEntity<>(booking, HttpStatus.OK);
     }
 
