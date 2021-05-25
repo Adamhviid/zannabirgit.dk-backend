@@ -4,21 +4,26 @@ import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.BookingCalendarView;
 import com.example.demo.repositories.BookingCalendarViewRepository;
 import com.example.demo.services.BookingCalendarViewService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BookingBookingCalendarViewJPAViewService implements BookingCalendarViewService {
+public class BookingCalendarViewJPAService implements BookingCalendarViewService {
     BookingCalendarViewRepository bookingCalendarViewRepository;
 
-    public BookingBookingCalendarViewJPAViewService(BookingCalendarViewRepository bookingCalendarViewRepository) {
+    public BookingCalendarViewJPAService(BookingCalendarViewRepository bookingCalendarViewRepository) {
         this.bookingCalendarViewRepository = bookingCalendarViewRepository;
     }
 
     @Override
     public List<BookingCalendarView> findAll() {
         return bookingCalendarViewRepository.findAll();
+    }
+
+    public List<BookingCalendarView> findAllSorted() {
+        return bookingCalendarViewRepository.findAllSorted(Sort.by("bookingTime"));
     }
 
     @Override
