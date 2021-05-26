@@ -29,7 +29,7 @@ public class BookingJPAService implements BookingService {
     }
 
     public Booking findByDateTime(Date bookingDate, Time bookingTime){
-        if(bookingRepository.findByDateTime(bookingDate, bookingTime) == null){
+        if(bookingRepository.findByDateTime(bookingDate, bookingTime).equals(null)){
              new ResourceNotFoundException("Booking findes allerede");
         } else {
             System.out.println("ikke null");
