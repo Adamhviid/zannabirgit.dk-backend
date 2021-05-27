@@ -41,26 +41,16 @@ public class ProductRestController {
     }
 
     //post product
-//    @ResponseStatus(HttpStatus.CREATED)
-    @PutMapping(value = "/products/edit", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value="/products/create", consumes = "application/json")
+    public Product postProduct(@RequestBody Product product) {
+        return productJPAService.save(product);
+    }
+
+    //edit product
+    @PutMapping("/products/edit")
     public Product editProduct(@RequestBody Product product) {
         return productJPAService.save(product);
     }
 
-
-    //edit product
-//    @PutMapping("/products/edit/{id}")
-//    public ResponseEntity<Product> editProduct(@PathVariable(value="id") Integer id, @RequestBody Product newProduct) throws ResourceNotFoundException {
-//        Product productTemplate = productJPAService.findById(id);
-//
-//        if(newProduct.getProductName() != null){
-//            productTemplate.setProductName(newProduct.getProductName());
-//        }
-//        if(newProduct.getProductPrice() != 0){
-//            productTemplate.setProductPrice(newProduct.getProductPrice());
-//        }
-//
-//        final Product updatedProductsEntity = productJPAService.save(productTemplate);
-//        return ResponseEntity.ok(updatedProductsEntity);
-//    }
 }

@@ -49,6 +49,12 @@ public class CustomerRestController {
         return customerJPAService.save(customer);
     }
 
+    //edit customer
+    @PutMapping(value="/customers/edit", consumes = "application/json")
+    public Customer editCustomer(@RequestBody Customer customer) {
+        return customerJPAService.save(customer);
+    }
+
     //delete customer
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/customers/delete/{id}")
